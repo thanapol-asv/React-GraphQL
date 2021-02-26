@@ -101,7 +101,6 @@ const Header: React.FC<HeaderProps> = ({ handleSearch, keyword }) => {
 	};
 	const handleCartClose = () => {
 		setCartOpen(false);
-		hist.push("/history");
 	};
 	const handleDecreaseItem = (item: ShoppingCart) => {
 		if (item.quantity > 0) {
@@ -120,6 +119,7 @@ const Header: React.FC<HeaderProps> = ({ handleSearch, keyword }) => {
 	const handleToastClose = () => {
 		setToastOpen(false);
 		setToastTransMessage("Transaction Failed");
+		hist.push("/history");
 	};
 
 	return (
