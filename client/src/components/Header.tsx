@@ -76,7 +76,6 @@ const Header: React.FC<HeaderProps> = ({ handleSearch, keyword }) => {
 		});
 		dispatch(resetCart());
 		setOneTimeRender(true);
-		setCartOpen(false);
 		setTotalPrice(0);
 	};
 
