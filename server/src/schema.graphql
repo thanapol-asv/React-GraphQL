@@ -1,0 +1,73 @@
+type HomeProduct {
+	products: [Product!]!
+	totalPages: Int!
+}
+
+type Product {
+	PRODUCT_ID: ID!
+	PRODUCT_NAME: String!
+	PRODUCT_DESCRIPTION: String!
+	PRODUCT_IMGSRC: String!
+	PRODUCT_PRICE: Int!
+	PRODUCT_SELLER: String!
+	PRODUCT_STOCK: Int!
+}
+
+input RequestItems {
+	PRODUCT_ID: ID!
+	quantity: Int!
+}
+
+input RequestForm {
+	reqItems: [RequestItems!]!
+}
+
+type Response {
+	unSuccess: [String]!
+	tid: ID!
+	ResponseStatus: Boolean!
+}
+
+type TransactionItem {
+	PRODUCT_ID: ID!
+	PRODUCT_NAME: String!
+	QUANTITY: Int!
+	THISPRICE: Int!
+}
+
+type Transaction {
+	tid: ID!
+	items: [TransactionItem!]!
+	totalPrice: Int!
+}
+
+type Query {
+	products(filter: String!, offset: Int!, limit: Int!): HomeProduct!
+	theproduct(PRODUCT_ID: ID!): Product!
+	getTransaction(transID: [String]!): [Transaction]!
+	getAllTransaction: [Transaction]!
+}
+
+type Mutation {
+	addItem(
+		PRODUCT_ID: ID!
+		PRODUCT_NAME: String!
+		PRODUCT_DESCRIPTION: String!
+		PRODUCT_IMGSRC: String!
+		PRODUCT_PRICE: Int!
+		PRODUCT_SELLER: String!
+		PRODUCT_STOCK: Int!
+	): [Product!]!
+	updateItem(
+		PRODUCT_ID: ID!
+		PRODUCT_NAME: String
+		PRODUCT_DESCRIPTION: String
+		PRODUCT_IMGSRC: String
+		PRODUCT_PRICE: Int
+		PRODUCT_SELLER: String
+		PRODUCT_STOCK: Int
+	): Product!
+	updateStock(PRODUCT_ID: ID!, type: String!, changeStock: Int!): Product!
+	deleteItem(PRODUCT_ID: ID!): [Product!]!
+	requestItem(form: [RequestItems]!): Response!
+}
